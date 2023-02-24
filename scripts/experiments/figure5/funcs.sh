@@ -51,57 +51,57 @@ setup_spark_conf() {
 
   if [ "$is_native" == true ]
   then
-    command="MY_JAVA_HOME=\"${ARTIFACT_EVALUATION_REPO}/native_jvm/build/linux-x86_64-normal-server-release/jdk\""
-    sed -i 'MY_JAVA_HOME=/c\'"$MY_JAVA_HOME" conf.sh
+    command="MY_JAVA_HOME=\"${ARTIFACT_EVALUATION_REPO}/jdk8u/build/linux-x86_64-normal-server-release/jdk\""
+    sed -i '/MY_JAVA_HOME=/c\'"$command" conf.sh
   else
     command="MY_JAVA_HOME=\"${TERAHEAP_PATH}/jdk8u345/build/linux-x86_64-normal-server-release/jdk\""
-    sed -i 'MY_JAVA_HOME=/c\'"$MY_JAVA_HOME" conf.sh
+    sed -i '/MY_JAVA_HOME=/c\'"$command" conf.sh
   fi
 
   command="DATA_HDFS=\"$DATA_HDFS\""
-  sed -i 'DATA_HDFS=/c\'"$command" conf.sh
+  sed -i '/DATA_HDFS=/c\'"$command" conf.sh
 
   command="BENCH_DIR=\"$ARTIFACT_EVALUATION_REPO/tera_applications\""
-  sed -i 'BENCH_DIR=/c\'"$command" conf.sh
+  sed -i '/\<BENCH_DIR=\>/c\'"$command" conf.sh
 
   command="SPARK_MASTER=$SPARK_MASTER"
-  sed -i 'SPARK_MASTER=/c\'"$command" conf.sh
+  sed -i '/SPARK_MASTER=/c\'"$command" conf.sh
 
   command="SPARK_SLAVE=$SPARK_SLAVE"
-  sed -i 'SPARK_SLAVE=/c\'"$command" conf.sh
+  sed -i '/SPARK_SLAVE=/c\'"$command" conf.sh
 
   command="GC_THREADS=$GC_THREADS"
-  sed -i 'GC_THREADS=/c\'"$command" conf.sh
+  sed -i '/GC_THREADS=/c\'"$command" conf.sh
 
   command="DEV_SHFL=$DEV_SHFL"
-  sed -i 'DEV_SHFL=/c\'"$command" conf.sh
+  sed -i '/DEV_SHFL=/c\'"$command" conf.sh
   
   command="MNT_SHFL=$MNT_SHFL"
-  sed -i 'MNT_SHFL=/c\'"$command" conf.sh
+  sed -i '/MNT_SHFL=/c\'"$command" conf.sh
   
   command="DEV_H2=$DEV_H2"
-  sed -i 'DEV_H2=/c\'"$command" conf.sh
+  sed -i '/DEV_H2=/c\'"$command" conf.sh
   
   command="MNT_H2=$MNT_H2"
-  sed -i 'MNT_H2=/c\'"$command" conf.sh
+  sed -i '/MNT_H2=/c\'"$command" conf.sh
   
   command="H1_SIZE=($h1_size)"
-  sed -i 'H1_SIZE=/c\'"$command" conf.sh
+  sed -i '/H1_SIZE=/c\'"$command" conf.sh
   
-  command="MEM_BUDGET=$mem_budget"
-  sed -i 'MEM_BUDGET=/c\'"$command" conf.sh
+  command="MEM_BUDGET=${mem_budget}G"
+  sed -i '/MEM_BUDGET=/c\'"$command" conf.sh
   
   if [ "$is_native" == "true" ]
   then
     command="S_LEVEL=(MEMORY_AND_DISK)"
-    sed -i 'S_LEVEL=/c\'"$command" conf.sh
+    sed -i '/S_LEVEL=/c\'"$command" conf.sh
   else
     command="S_LEVEL=(MEMORY_ONLY)"
-    sed -i 'S_LEVEL=/c\'"$command" conf.sh
+    sed -i '/S_LEVEL=/c\'"$command" conf.sh
   fi
   
   command="BENCHMARKS=(${workload})"
-  sed -i 'BENCHMARKS=/c\'"$command" conf.sh
+  sed -i '/BENCHMARKS=/c\'"$command" conf.sh
 }
 
 ##
