@@ -39,5 +39,8 @@ sudo tar xf apache-maven-3.6.0-bin.tar.gz -C /opt/asplos_ae
 # Install Python3
 sudo yum -y install python3
 sudo yum -y install python3-pip
+sudo yum install -y python3-devel.x86_64
+sudo yum -y install libjpeg-turbo-devel
 sudo python3 -m pip install -U matplotlib
+pip3 install Pillow
 sudo pip3 install matplotlib
