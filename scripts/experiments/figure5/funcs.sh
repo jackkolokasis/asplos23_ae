@@ -215,6 +215,7 @@ parse_results() {
   local minor_gc_time=0
   local major_gc_time=0
   local sd_time=0
+  local i
 
   if [ "${is_native}" == "false" ]
   then
